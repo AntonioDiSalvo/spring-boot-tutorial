@@ -11,9 +11,21 @@ versione 0.0.1 :
 versione 0.0.2 :
 * integrazione persistenza
   * utilizzando MongoDB
-* ritornare dei documenti escludento campi selezionati
+* ritornare dei documenti escludendo campi selezionati
 
 versione 0.0.3 :
 * gestire delle props da file per ambienti distinti (profili)
+  * gestire diverse credenziali Mongo per profili diversi
 * gestire delle props da config-server
 
+versione 0.0.4 :
+* completare il CRUD con delle entita` piu complesse
+* autenticazione e autorizzazione con Spring Security
+
+versione 0.0.5 :
+* attivare gli actuator di Spring Boot
+* definire un check di Health personalizzato e aggiungerlo al gruppo readiness
+
+versione 0.0.6 :
+* pacchettizzazione come Jar eseguibile
+* pacchettizazione come immagine Docker

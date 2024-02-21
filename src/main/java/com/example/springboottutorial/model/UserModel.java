@@ -47,4 +47,14 @@ public class UserModel {
     private String surname;
 
     private Date birthDate;
+
+    public String getGreeting() {
+        return greeting;
+    }
+
+    public void setGreeting(String greeting) {
+        this.greeting = greeting;
+    }
+
+    private String greeting;
 }
