@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Pagina di Esempio - Saluti</title>
+</head>
+<body>
+<h3>Hello Page!</h3>
+<h3>Hello Hello!</h3>
+<div th:if="${param.ertror}">
+    Uh oh! autenticazione fallita!
+</div>
+<form th:action="@{/login}" method="post">
+    user name <input type="text" name="username"/>
+    password <input type="password" name="password" />
+    <input type="submit" value="Log me in!" />
+</form>
+</body>

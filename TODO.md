@@ -22,6 +22,9 @@ versione 0.0.3 :
 versione 0.0.4 :
 * completare il CRUD con delle entita` piu complesse
 * autenticazione e autorizzazione con Spring Security
+  * autenticazione con sessione per app MVC
+  * autenticazione con flusso OAuth
+  * centralizzare (annotare) filtro JWT per controller REST
 
 versione 0.0.5 :
 * attivare gli actuator di Spring Boot
