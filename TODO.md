@@ -14,6 +14,7 @@ versione 0.0.2 :
 * ritornare dei documenti escludendo campi selezionati
 
 versione 0.0.3 :
+* rimappare entity in DTO selezionando solo alcuni campi
 * gestire delle props da file per ambienti distinti (profili)
   * gestire diverse credenziali Mongo per profili diversi
 * gestire delle props da config-server
