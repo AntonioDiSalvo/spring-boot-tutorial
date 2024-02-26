@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
+import org.springframework.beans.factory.annotation.Value;
 
 @Log4j2
 @RestController
@@ -19,6 +19,14 @@ public class MyController {
     // GetMapping("greeting")
     @Autowired
     GreetingRepository gr;
+
+    @Value("${message-from-config-server}")
+    String configFromServer;
+
+    @RequestMapping(method = GET, path = "greetingServer")
+    public Greeting getGreetingFromConf() {
+        return new Greeting(4, configFromServer);
+    }
 
     @RequestMapping(method = GET, path = "greeting")
     public Greeting getGreeting() {

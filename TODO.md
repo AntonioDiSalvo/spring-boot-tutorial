@@ -16,8 +16,8 @@ versione 0.0.2 :
 versione 0.0.3 :
 * rimappare entity in DTO selezionando solo alcuni campi
 * gestire delle props da file per ambienti distinti (profili)
-  * gestire diverse credenziali Mongo per profili diversi
-* gestire delle props da config-server
+  * gestire diversi databases Mongo per profili diversi
+* gestire delle props da config-server (secondo convenzione : http://localhost:8888/bootiful/default)
 
 versione 0.0.4 :
 * completare il CRUD con delle entita` piu complesse
