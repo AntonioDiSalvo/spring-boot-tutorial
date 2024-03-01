@@ -33,3 +33,4 @@ versione 0.0.5 :
 versione 0.0.6 :
 * pacchettizzazione come Jar eseguibile
 * pacchettizazione come immagine Docker
+* definizione di tests (unitari e di integrazione)

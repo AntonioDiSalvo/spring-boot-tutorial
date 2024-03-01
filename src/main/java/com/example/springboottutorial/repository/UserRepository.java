@@ -12,4 +12,6 @@ public  interface UserRepository  extends MongoRepository<UserModel, Long> {
 
     @Query(value="{'name' : ?0}", fields = "{'name' : 1}")
     List<UserModel> findAllByName(String name);
+
+    UserModel findByUsername(String username);
 }

@@ -17,11 +17,12 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests((requests) ->
-               requests.requestMatchers("/adminPage").hasRole("ADMIN").anyRequest().authenticated())
-                        //requests.requestMatchers("/","/home").permitAll().anyRequest().authenticated())
-                .formLogin((form) -> form.loginPage("/login").permitAll())
-                .logout((logout) -> logout.permitAll());
+
+//        http.addFilter(new JwtFilter())
+//                .authorizeHttpRequests((requests) ->
+//                 requests.requestMatchers("/","/home").permitAll().anyRequest().authenticated())
+//                .formLogin((form) -> form.loginPage("/login").permitAll())
+//                .logout((logout) -> logout.permitAll());
 
         return http.build();
     }
