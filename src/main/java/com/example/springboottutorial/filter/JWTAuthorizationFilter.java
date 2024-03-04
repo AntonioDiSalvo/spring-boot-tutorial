@@ -17,20 +17,20 @@ import java.util.ArrayList;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    @Value("${token.secret}")
-    String tokenSecret;
+//  @Value("${token.secret}")
+    String tokenSecret = "gabriele-93";
 
-    @Value("${token.expiry}")
-    String tokenExpiry;
+//  @Value("${token.expiry}")
+    long tokenExpiry = 864_000_000;
 
     public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
-    // doFilterInternal
-
     @Override
-    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest req,
+                                    HttpServletResponse res,
+                                    FilterChain chain) throws ServletException, IOException {
         String jwtHeader = req.getHeader("Authorization");
 
         if (jwtHeader == null) {

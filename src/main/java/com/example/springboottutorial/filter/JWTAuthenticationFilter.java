@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
@@ -20,8 +21,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     final private AuthenticationManager authenticationManager;
 
-    private String JWT_SECRET = "my-secret";
-    private long JWT_DURATION = 86400;
+    private String JWT_SECRET = "gabriele-93";
+    private long JWT_DURATION = 864_000_000;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -33,8 +34,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             UserModel user = new ObjectMapper().readValue(req.getInputStream(), UserModel.class);
 
             return authenticationManager.authenticate(
-              new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>())
+              new UsernamePasswordAuthenticationToken(
+                      user.getUsername(),
+                      user.getPassword(),
+                      new ArrayList<>())
             );
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -44,7 +49,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res,
                                             FilterChain chain, Authentication authResult) {
         // creazione token
-        String sub = ((UserModel) authResult.getPrincipal()).getUsername();
+        String sub = ((User) authResult.getPrincipal()).getUsername();
 
         String jwtToken =
                 JWT.create()
