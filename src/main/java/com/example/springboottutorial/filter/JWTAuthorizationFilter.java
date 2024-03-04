@@ -2,6 +2,7 @@ package com.example.springboottutorial.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -55,8 +58,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                         .build()
                         .verify(jwtToken)
                         .getSubject();
+
+                Map<String, Claim> claims = JWT.decode(jwtToken).getClaims();
+                List<String> roles = new ArrayList<>();
+                roles.add(claims.get("authorities").asString());
+
                 if (sub != null) {
-                    auth = new UsernamePasswordAuthenticationToken(sub, null, new ArrayList<>());
+                    auth = new UsernamePasswordAuthenticationToken(sub, null, roles);
                 }
             }
             return auth;

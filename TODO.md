@@ -26,6 +26,8 @@ versione 0.0.4 :
   * autenticazione con flusso OAuth
   * centralizzare (annotare) filtro JWT per controller REST
 
+  * (piccolo recap)
+
 versione 0.0.5 :
 * attivare gli actuator di Spring Boot
 * definire un check di Health personalizzato e aggiungerlo al gruppo readiness
@@ -33,4 +35,6 @@ versione 0.0.5 :
 versione 0.0.6 :
 * pacchettizzazione come Jar eseguibile
 * pacchettizazione come immagine Docker
+
+versione 0.0.7 :
 * definizione di tests (unitari e di integrazione)
