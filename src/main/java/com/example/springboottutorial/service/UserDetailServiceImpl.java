@@ -2,6 +2,8 @@ package com.example.springboottutorial.service;
 
 import com.example.springboottutorial.model.UserModel;
 import com.example.springboottutorial.repository.UserRepository;
+import org.springframework.boot.autoconfigure.task.TaskExecutionProperties;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
@@ -27,7 +31,15 @@ public class UserDetailServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         } else {
             // se trovo l'utente, lo ritorno nella struttura User di Spring Security
-            return new User(userDetails.getUsername(), userDetails.getPassword(), new ArrayList<>());
+//            List<SimpleGrantedAuthority> grantedAuthorityList = userDetails.getAuthority()
+//                    .map(authority -> new SimpleGrantedAuthority(authority))
+//                    .collect(Collectors.toList());
+
+            List<SimpleGrantedAuthority> grantedAuthorityList =
+                    new ArrayList<SimpleGrantedAuthority>();
+            grantedAuthorityList.add(new SimpleGrantedAuthority(userDetails.getAuthority()));
+
+            return new User(userDetails.getUsername(), userDetails.getPassword(), grantedAuthorityList);
         }
     }
 }

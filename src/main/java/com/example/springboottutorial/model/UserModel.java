@@ -80,4 +80,16 @@ public class UserModel {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
+    private String authority;
+
 }

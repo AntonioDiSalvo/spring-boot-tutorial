@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProtectedResourceController {
 
     @GetMapping("/protected")
-    @Secured("ROLE_USER") // Role-based authorization
+    @Secured("ROLE_ADMIN") // Role-based authorization
     public String protectedResource() {
         return "This is a protected resource.";
     }

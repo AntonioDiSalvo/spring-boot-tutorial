@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -60,11 +61,15 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                         .getSubject();
 
                 Map<String, Claim> claims = JWT.decode(jwtToken).getClaims();
-                List<String> roles = new ArrayList<>();
-                roles.add(claims.get("authorities").asString());
+//                List<String> roles = new ArrayList<>();
+//                roles.add(claims.get("authorities").asString());
+
+                List<SimpleGrantedAuthority> grantedAuthorityList =
+                        new ArrayList<SimpleGrantedAuthority>();
+                grantedAuthorityList.add(new SimpleGrantedAuthority(claims.get("authorities").asString()));
 
                 if (sub != null) {
-                    auth = new UsernamePasswordAuthenticationToken(sub, null, roles);
+                    auth = new UsernamePasswordAuthenticationToken(sub, null, grantedAuthorityList);
                 }
             }
             return auth;

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -48,14 +49,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res,
                                             FilterChain chain, Authentication authResult) {
+        User mUser = ((User) authResult.getPrincipal());
         // creazione token
-        String sub = ((User) authResult.getPrincipal()).getUsername();
+        String sub = mUser.getUsername();
 
         String jwtToken =
                 JWT.create()
                         .withSubject(sub)
                         .withExpiresAt(new Date(System.currentTimeMillis() + JWT_DURATION))
-                        .withClaim("authorities", "ROLE_ADMIN")
+                        .withClaim("authorities", StringUtils.join(mUser.getAuthorities(), " "))
                         .sign(Algorithm.HMAC512(JWT_SECRET.getBytes()))
                 ;
 

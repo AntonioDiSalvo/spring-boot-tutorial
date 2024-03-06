@@ -5,6 +5,7 @@ import com.example.springboottutorial.model.GreetingModel;
 import com.example.springboottutorial.repository.GreetingRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class MyController {
     }
 
     @RequestMapping(method = POST, path = "greeting", consumes = "application/json")
+    @Secured("ROLE_USER")
     public Greeting postGreeting (@RequestBody Greeting greeting) {
         GreetingModel gm = new GreetingModel();
         gm.setId(greeting.id());
