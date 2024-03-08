@@ -82,14 +82,14 @@ public class UserModel {
     }
 
 
-    public String getAuthority() {
-        return authority;
+    public String getRole() {
+        return role;
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    private String authority;
+    private String role;
 
 }

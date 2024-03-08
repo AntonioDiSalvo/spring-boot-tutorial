@@ -34,10 +34,19 @@ public class UserDetailServiceImpl implements UserDetailsService {
 //            List<SimpleGrantedAuthority> grantedAuthorityList = userDetails.getAuthority()
 //                    .map(authority -> new SimpleGrantedAuthority(authority))
 //                    .collect(Collectors.toList());
-
             List<SimpleGrantedAuthority> grantedAuthorityList =
                     new ArrayList<SimpleGrantedAuthority>();
-            grantedAuthorityList.add(new SimpleGrantedAuthority(userDetails.getAuthority()));
+
+            if ("ROLE_ADMIN".equals(userDetails.getRole())) {
+                grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_READ"));
+                grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_WRITE"));
+                grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_UPDATE"));
+                grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_DELETE"));
+            } else if ("ROLE_USER".equals(userDetails.getRole())) {
+                grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_READ"));
+            } else {
+                grantedAuthorityList.add(new SimpleGrantedAuthority(userDetails.getRole()));
+            }
 
             return new User(userDetails.getUsername(), userDetails.getPassword(), grantedAuthorityList);
         }

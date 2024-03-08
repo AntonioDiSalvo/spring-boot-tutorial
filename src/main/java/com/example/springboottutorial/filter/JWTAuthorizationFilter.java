@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -65,9 +66,14 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 //                roles.add(claims.get("authorities").asString());
 
 
-                List<SimpleGrantedAuthority> grantedAuthorityList =
-                        new ArrayList<SimpleGrantedAuthority>();
-                grantedAuthorityList.add(new SimpleGrantedAuthority(claims.get("authorities").asString()));
+//                List<SimpleGrantedAuthority> grantedAuthorityList =
+//                        new ArrayList<SimpleGrantedAuthority>();
+
+                List<SimpleGrantedAuthority> grantedAuthorityList = claims.get("authorities").asList(String.class).stream().map(
+                        (mAuth) -> new SimpleGrantedAuthority(mAuth)
+                ).collect(Collectors.toList());
+
+//                grantedAuthorityList.add(new SimpleGrantedAuthority(claims.get("authorities").asString()));
 
                 if (sub != null) {
                     auth = new UsernamePasswordAuthenticationToken(sub, null, grantedAuthorityList);

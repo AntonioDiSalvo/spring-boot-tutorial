@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -57,7 +58,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 JWT.create()
                         .withSubject(sub)
                         .withExpiresAt(new Date(System.currentTimeMillis() + JWT_DURATION))
-                        .withClaim("authorities", StringUtils.join(mUser.getAuthorities(), " "))
+                        .withClaim("authorities", mUser.getAuthorities().stream().map((auth) -> auth.getAuthority()).collect(Collectors.toList()))
                         .sign(Algorithm.HMAC512(JWT_SECRET.getBytes()))
                 ;
 

@@ -41,7 +41,7 @@ public class MyController {
     }
 
     @RequestMapping(method = POST, path = "greeting", consumes = "application/json")
-    @Secured("ROLE_USER")
+    @Secured("ROLE_WRITE")
     public Greeting postGreeting (@RequestBody Greeting greeting) {
         GreetingModel gm = new GreetingModel();
         gm.setId(greeting.id());
