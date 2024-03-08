@@ -6,6 +6,8 @@ import com.example.springboottutorial.repository.GreetingRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +25,11 @@ public class MyController {
 
     @Value("${message-from-config-server}")
     String configFromServer;
+
+    @GetMapping("/social/user")
+    public String getUserInfo(@AuthenticationPrincipal OAuth2User principal) {
+        return principal.getAttribute("login");
+    }
 
     @RequestMapping(method = GET, path = "greetingServer")
     public Greeting getGreetingFromConf() {

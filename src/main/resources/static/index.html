@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+</head>
+<body>
+
+Collegati con github: <a href="/oauth2/authorization/github">clicca qui</a>
+<span id="login"></span>
+<script type="text/javascript">
+    $.get("/social/user", function(data) {
+        $("#login").html(data);
+    })
+</script>
+</body>
+</html>
