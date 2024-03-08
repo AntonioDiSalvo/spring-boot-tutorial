@@ -12,4 +12,9 @@ public class ProtectedResourceController {
     public String protectedResource() {
         return "This is a protected resource.";
     }
+
+    @GetMapping("/very-protected")
+    public String veryProtectedResource() {
+        return this.protectedResource();
+    }
 }

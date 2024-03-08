@@ -26,7 +26,7 @@ versione 0.0.4 :
   * autenticazione con flusso OAuth
   * centralizzare (annotare) filtro JWT per controller REST
 
-  * (piccolo recap)
+* divisione in branches per i meccanismi di sicurezza analizzati
 
 versione 0.0.5 :
 * attivare gli actuator di Spring Boot

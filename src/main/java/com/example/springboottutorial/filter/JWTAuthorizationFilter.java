@@ -42,8 +42,8 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             return;
         }
 
+        // imposto l'oggetto di Authenticazione
         Authentication auth = getAuthentication(jwtHeader);
-
         SecurityContextHolder.getContext().setAuthentication(auth);
         chain.doFilter(req, res);
 
@@ -63,6 +63,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                 Map<String, Claim> claims = JWT.decode(jwtToken).getClaims();
 //                List<String> roles = new ArrayList<>();
 //                roles.add(claims.get("authorities").asString());
+
 
                 List<SimpleGrantedAuthority> grantedAuthorityList =
                         new ArrayList<SimpleGrantedAuthority>();
