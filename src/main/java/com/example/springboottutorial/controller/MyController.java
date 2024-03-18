@@ -28,7 +28,14 @@ public class MyController {
 
     @GetMapping("/social/user")
     public String getUserInfo(@AuthenticationPrincipal OAuth2User principal) {
-        return principal.getAttribute("login");
+
+        String userInfo = "none";
+
+        if (principal != null) {
+            userInfo = principal.getAttribute("name");
+        }
+
+        return userInfo;
     }
 
     @RequestMapping(method = GET, path = "greetingServer")
