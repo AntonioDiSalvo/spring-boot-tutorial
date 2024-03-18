@@ -7,13 +7,14 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
 @Configuration
 public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // disabilitare la gestione dei filtri CORS e CSRF
-//        http.cors(AbstractHttpConfigurer::disable).csrf(AbstractHttpConfigurer::disable);
+        http.cors(AbstractHttpConfigurer::disable).csrf(AbstractHttpConfigurer::disable);
 
         // escludere dall'autenticazione i percorsi relativi a login e creazione utente
         String[] EXCLUDED_URL = {
@@ -21,7 +22,8 @@ public class WebSecurityConfig {
           "/index.html",
           "/error",
           "/webjars/**",
-                "/social/user"
+                "/social/user",
+                "/logout"
         };
 
         http.authorizeHttpRequests(auth -> auth.requestMatchers(EXCLUDED_URL).permitAll());
@@ -30,7 +32,8 @@ public class WebSecurityConfig {
         //http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
         http.exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
         http.oauth2Login(Customizer.withDefaults());
-        //http.oauth2Client()
+        http.logout(l -> l.logoutSuccessUrl("/").permitAll());
+
         return http.build();
     }
 }

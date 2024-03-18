@@ -11,8 +11,17 @@
 
 <div>Collegati con Google <a href="/oauth2/authorization/google">clicca qui</a></div>
 
-<span id="login"></span>
+<div id="loginContainer">Info utente: <span id="login"></span></div>
+
+<div><button onClick="logout()">Logout</button></div>
+
 <script type="text/javascript">
+    var logout = function() {
+        $.post("/logout", function() {
+           // implementare comportamento in pagina
+            $("#loginContainer").html("");
+        });
+    }
     $.get("/social/user", function(data) {
         $("#login").html(data);
     })
