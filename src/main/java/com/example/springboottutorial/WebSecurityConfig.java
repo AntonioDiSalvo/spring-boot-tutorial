@@ -59,7 +59,8 @@ public class WebSecurityConfig {
         // escludere dall'autenticazione i percorsi relativi a login e creazione utente
         String[] EXCLUDED_URL = {
           "/user",
-          "/login"
+          "/login",
+          "/actuator/**"
         };
         http.authorizeHttpRequests(auth -> auth.requestMatchers(EXCLUDED_URL).permitAll());
 
