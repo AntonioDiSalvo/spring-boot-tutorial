@@ -35,6 +35,7 @@ versione 0.0.5 :
 versione 0.0.6 :
 * pacchettizzazione come Jar eseguibile
 * pacchettizazione come immagine Docker
+* riportare su Kubernetes
 
 versione 0.0.7 :
 * definizione di tests (unitari e di integrazione)
