@@ -1,6 +1,9 @@
 # spring-boot-tutorial
 codice di esempio - Spring Boot
 
+Creazione jar eseguibile: 
+`./mvnw install`
+
 istruzioni build immagine docker :
 `./mvnw spring-boot:build-image`
 
