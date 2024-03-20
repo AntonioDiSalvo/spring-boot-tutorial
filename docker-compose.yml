@@ -1,16 +1,25 @@
 version: '3'
 
 services:
+
   spring-tutorial:
-    image: spring-boot-tutorial:0.0.6-SNAPSHOT
+    image: disalvoantonio/spring-boot-tutorial:0.0.6-SNAPSHOT
     ports:
       - "8080:8080"
     depends_on:
       - mongo
+      - spring-tutorial-config-server
+
+
+  spring-tutorial-config-server:
+    image: disalvoantonio/demo-config-server:0.0.1-SNAPSHOT
+    ports:
+      - "8888:8888"
+
   mongo:
     image: mongo
     environment:
       - MONGO_INITDB_DATABASE=project
     ports:
-      - "27017:27017"
+      - "27057:27017"
 
