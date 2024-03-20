@@ -15,10 +15,11 @@ public class CustomHealthCheck implements HealthIndicator {
     @Override
     public Health health() {
         Health.Builder myHealthBuilder = new Health.Builder();
-        if (mRandom.nextInt() % 2 == 0) {
-            return myHealthBuilder.down().build();
-        } else {
-            return myHealthBuilder.up().build();
-        }
+//        if (mRandom.nextInt() % 2 == 0) {
+//            return myHealthBuilder.down().build();
+//        } else {
+//            return myHealthBuilder.up().build();
+//        }
+        return myHealthBuilder.up().build();
     }
 }
