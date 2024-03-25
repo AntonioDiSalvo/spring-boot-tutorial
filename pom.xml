@@ -94,7 +94,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-						<name>disalvoantonio/${project.artifactId}:${project.version}</name>
+						<name>gabrielx/${project.artifactId}:${project.version}</name>
 					</image>
 					<excludes>
 						<exclude>

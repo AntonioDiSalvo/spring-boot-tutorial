@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: demo-config-server
+  name: demo-config-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-config-server
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: demo-config-server
+    spec:
+      containers:
+        - image: gabrielx/demo-config-server:0.0.1-SNAPSHOT
+          name: demo-config-server
+          resources: {}
+status: {}

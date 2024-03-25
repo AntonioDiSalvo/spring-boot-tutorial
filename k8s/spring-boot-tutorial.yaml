@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-boot-tutorial
+  name: spring-boot-tutorial
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-tutorial
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-boot-tutorial
+    spec:
+      containers:
+        - image: gabrielx/spring-boot-tutorial:0.0.6-SNAPSHOT
+          name: spring-boot-tutorial
+          resources: {}
+          env:
+          - name: SPRING_CLOUD_CONFIG_URI
+            value: http://user:password@demo-config-server:8888
+status: {}

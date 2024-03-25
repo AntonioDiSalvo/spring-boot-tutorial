@@ -2,7 +2,7 @@ FROM arm64v8/eclipse-temurin as build
 WORKDIR /workspace/app
 
 COPY mvnw .
-COPY .mvn .mvn
+COPY ../spring-boot-tutorial-config-server/.mvn .mvn
 COPY pom.xml .
 COPY src src
 
