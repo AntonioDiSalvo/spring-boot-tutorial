@@ -36,6 +36,7 @@ versione 0.0.6 :
 * pacchettizzazione come Jar eseguibile
 * pacchettizazione come immagine Docker
 * riportare su Kubernetes
+* definire CI/CD per il progetto (Argo)
 
 versione 0.0.7 :
 * definizione di tests (unitari e di integrazione)
