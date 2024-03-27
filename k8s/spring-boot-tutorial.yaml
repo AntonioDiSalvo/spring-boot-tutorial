@@ -22,6 +22,20 @@ spec:
           name: spring-boot-tutorial
           resources: {}
           env:
-          - name: SPRING_CLOUD_CONFIG_URI
-            value: http://user:password@demo-config-server:8888
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://user:password@demo-config-server:8888
+            - name: SPRING_DATA_MONGODB_DATABASE
+              value: someDatabase
+            - name: message-from-config-server
+              value: someMessage
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health/readiness
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health/liveness
 status: {}
