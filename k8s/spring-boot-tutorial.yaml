@@ -28,6 +28,8 @@ spec:
               value: someDatabase
             - name: message-from-config-server
               value: someMessage
+            - name: SOME_ENV
+              value: someMessage
           readinessProbe:
             httpGet:
               port: 8080
