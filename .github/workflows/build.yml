@@ -50,7 +50,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
           restore-keys: ${{runner.os}}-m2
       - name: analisi sonarcloud
-        run: mvn -B verify sonar:sonar -Dsonar.projectkey=Ostap_spring-boot-tutorial -Dsonar.organization=AntonioDiSalvo -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+        run: mvn -B verify sonar:sonar -Dsonar.projectkey=Ostap_spring-boot-tutorial -Dsonar.organization=Ostap -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
