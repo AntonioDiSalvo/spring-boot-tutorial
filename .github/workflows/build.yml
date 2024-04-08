@@ -24,4 +24,31 @@ jobs:
           restore-keys: ${{runner.os}}-m2
       - name: esegui tests
         run: mvn -B test
-
+  quality-check:
+    needs: testing
+    name: analisi SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '21'
+      - name: cache sonarcloud pkgs
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{runner.os}}-sonar
+      - name: maven cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
+          restore-keys: ${{runner.os}}-m2
+      - name: analisi sonarcloud
+        run: mvn -B verify sonar:sonar -Dsonar.projectkey=Ostap_spring-boot-tutorial -Dsonar.organization=AntonioDiSalvo -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
