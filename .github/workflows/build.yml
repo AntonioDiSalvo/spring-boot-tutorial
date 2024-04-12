@@ -127,4 +127,4 @@ jobs:
         with:
           title: new PR for image change
           branch: update-infra-manifest
-          commit-message: aggiorno manifest
+          commit-message: aggiornamento manifest
