@@ -120,8 +120,9 @@ jobs:
         run: |
           sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.35.2/yq_linux_amd64 -o /usr/local/bin/yq
           sudo chmod +x /usr/local/bin/yq
-#      - name: update image tag
-#        run: 'yq -i e \'.spec.template.spec.containers.[0].image = "disalvoantonio/spring-boot-tutorial:testing"\' k8s/spring-boot-tutorial.yaml'
+      - name: update image tag
+        run: |
+          yq -i e '.spec.template.spec.containers.[0].image = "disalvoantonio/spring-boot-tutorial:testing"' k8s/spring-boot-tutorial.yaml
       - name: push / pr
         uses: peter-evans/create-pull-request@v5
         with:
