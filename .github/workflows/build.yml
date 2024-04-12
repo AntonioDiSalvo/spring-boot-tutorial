@@ -5,81 +5,81 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 jobs:
-#  testing:
-#    name: Run Unit Tests
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: checkout
-#        uses: actions/checkout@v4
-#      - name: setup JDK
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: '21'
-#      - name: maven cache
-#        uses: actions/cache@v1
-#        with:
-#          path: ~/.m2
-#          key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
-#          restore-keys: ${{runner.os}}-m2
-#      - name: Start MongoDB
-#        uses: supercharge/mongodb-github-action@1.10.0
-#      - name: esegui tests
-#        run: mvn -B test
-#  quality-check:
-#    needs: testing
-#    name: analisi SonarCloud
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: checkout
-#        uses: actions/checkout@v4
-#      - name: setup JDK
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: '21'
-#      - name: cache sonarcloud pkgs
-#        uses: actions/cache@v1
-#        with:
-#          path: ~/.sonar/cache
-#          key: ${{ runner.os }}-sonar
-#          restore-keys: ${{runner.os}}-sonar
-#      - name: maven cache
-#        uses: actions/cache@v1
-#        with:
-#          path: ~/.m2
-#          key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
-#          restore-keys: ${{runner.os}}-m2
-#      - name: analisi sonarcloud
-#        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=AntonioDiSalvo_spring-boot-tutorial
-#        env:
-#          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-#          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
-#  build:
-#    needs: quality-check
-#    name: Build
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: checkout
-#        uses: actions/checkout@v4
-#      - name: setup JDK
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: '21'
-#      - name: maven cache
-#        uses: actions/cache@v1
-#        with:
-#          path: ~/.m2
-#          key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
-#          restore-keys: ${{runner.os}}-m2
-#      - name: Build with Maven
-#        run: mvn -B package -DskipTests --file pom.xml
-#      - name: upload release
-#        uses: actions/upload-artifact@v2
-#        with:
-#            name: myArtifactRelease
-#            path: target/spring-boot-tutorial-0.0.6-SNAPSHOT.jar
+  testing:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '21'
+      - name: maven cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
+          restore-keys: ${{runner.os}}-m2
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+      - name: esegui tests
+        run: mvn -B test
+  quality-check:
+    needs: testing
+    name: analisi SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '21'
+      - name: cache sonarcloud pkgs
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{runner.os}}-sonar
+      - name: maven cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
+          restore-keys: ${{runner.os}}-m2
+      - name: analisi sonarcloud
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=AntonioDiSalvo_spring-boot-tutorial
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+  build:
+    needs: quality-check
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '21'
+      - name: maven cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashfiles('**/pom.xml') }}
+          restore-keys: ${{runner.os}}-m2
+      - name: Build with Maven
+        run: mvn -B package -DskipTests --file pom.xml
+      - name: upload release
+        uses: actions/upload-artifact@v2
+        with:
+            name: myArtifactRelease
+            path: target/spring-boot-tutorial-0.0.6-SNAPSHOT.jar
   push_image_to_registry:
     name: Push immagine docker sul registry Docker Hub
-    # needs: build
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -115,4 +115,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: disalvoantonio/spring-boot-tutorial:${{ steps.metadata.output.tags }}
+          tags: disalvoantonio/spring-boot-tutorial:testing #${{ steps.metadata.output.tags }}
