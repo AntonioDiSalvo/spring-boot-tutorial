@@ -116,3 +116,9 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: disalvoantonio/spring-boot-tutorial:testing #${{ steps.metadata.output.tags }}
+      - name: installazione yq
+        run: |
+          sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.35.2/yq_linux_amd64 -o /usr/local/bin/yq
+          sudo chmod +x /usr/local/bin/yq
+      - name: update image tag
+        run: 'yq -i e " = testing" k8s/spring-boot-tutorial.yaml '
