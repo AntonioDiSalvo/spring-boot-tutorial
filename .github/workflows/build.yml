@@ -116,3 +116,10 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: disalvoantonio/spring-boot-tutorial:testing #${{ steps.metadata.output.tags }}
+      - name: update k8s manifest
+        id: update
+        uses: Charlyzzz/update-k8s-image
+        with:
+          manifest-path: k8s/spring-boot-tutorial.yaml
+          new-image-tag: testing
+          name: spring-boot-tutorial
