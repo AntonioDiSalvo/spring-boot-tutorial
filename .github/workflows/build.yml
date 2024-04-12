@@ -122,3 +122,9 @@ jobs:
           sudo chmod +x /usr/local/bin/yq
       - name: update image tag
         run: 'yq -i e ".spec.template.spec.containers.image = testing" k8s/spring-boot-tutorial.yaml '
+      - name: push / pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: new PR for image change
+          branch: update-infra-manifest
+          commit-message: aggiorno manifest
