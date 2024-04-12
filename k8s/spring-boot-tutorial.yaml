@@ -18,7 +18,7 @@ spec:
         app: spring-boot-tutorial
     spec:
       containers:
-        - image: gabrielx/spring-boot-tutorial:0.0.6-SNAPSHOT
+        - image: disalvoantonio/spring-boot-tutorial:testing
           name: spring-boot-tutorial
           resources: {}
           env:
