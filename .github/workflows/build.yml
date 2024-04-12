@@ -79,7 +79,7 @@ jobs:
 #            path: target/spring-boot-tutorial-0.0.6-SNAPSHOT.jar
   push_image_to_registry:
     name: Push immagine docker sul registry Docker Hub
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     steps:
       - name: checkout
