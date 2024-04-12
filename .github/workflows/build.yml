@@ -123,9 +123,16 @@ jobs:
       - name: update image tag
         run: |
           yq -i e '.spec.template.spec.containers.[0].image = "disalvoantonio/spring-boot-tutorial:testing"' k8s/spring-boot-tutorial.yaml
-      - name: push / pr
-        uses: peter-evans/create-pull-request@v5
-        with:
-          title: new PR for image change
-          branch: update-infra-manifest
-          commit-message: aggiornamento manifest
+      - name: commit changes to infra repo
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'me@example.org'
+          git add k8s/spring-boot-tutorial.yaml
+          git commit -m "update image tag"
+          git push
+#      - name: push / pr
+#        uses: peter-evans/create-pull-request@v5
+#        with:
+#          title: new PR for image change
+#          branch: update-infra-manifest
+#          commit-message: aggiornamento manifest
